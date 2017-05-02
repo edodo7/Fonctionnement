@@ -1,0 +1,3 @@
+xc32-as -O0 -o main1a.o main1a.s
+xc32-gcc -T ldscript.ld -o main1a.bin main1a
+xc32-objcopy -O ihex main1a.bin main1a.hex
