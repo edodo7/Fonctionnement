@@ -27,7 +27,7 @@ main_loop:
 	sw $a1, 0($a0)
 	
 	#Boucle d'attente
-	li $a3, 1000000
+	li $a3, 10000000
 	jal loop
         
 	#Boucle cycle
