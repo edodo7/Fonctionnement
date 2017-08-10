@@ -46,17 +46,22 @@ main:
 recherche:
 	bgt $a1, $a2, basPlusGrand # if bas > haut
 	sub $t0, $a2, $a1 # $t0 = bas - haut
-	li $t1, 2
-	div $t0,$t1
-	mflo $t0 # $t0 = (bas - haut) / 2
+	sra $t0, $t0, 1 # integer division by 2
 	add $t0, $t0, $a1 # $t0 = bas + (bas - haut) / 2 <==> milieu
 	sll $t1, $t0, 2
 	add $t1, $t1, $a0
 	lw $t2, 0($t1) # $t2 = tab[milieu]
 	beq $a3, $t2, cEgalTabMilieu # if c == tab[milieu]
 	blt $a3 , $t2 , cPlusPetit # if c < tab[milieu]
-	j cPlusGrand # else
-	
+cPlusGrand:# else (fall through)
+	addi $sp, $sp, -4
+	sw $ra, 0($sp)
+	addi $a1, $t0, 1 # bas = milieu + 1
+	jal recherche # call recherche(tab, milieu + 1, haut, c)
+	lw $ra, 0($sp)
+	addi $sp, $sp, 4
+	jr $ra
+
 
 basPlusGrand:# if bas > haut
 	li $v0, -1
@@ -70,19 +75,8 @@ cEgalTabMilieu: # if c == tab[milieu]
 cPlusPetit:# if c < tab[milieu]
 	addi $sp, $sp, -4
 	sw $ra, 0($sp) 
-	addi $t0, $t0, -1 
-	move $a2, $t0 # haut = milieu - 1
+	addi $a2, $t0, -1
 	jal recherche # call recherche(tab, bas, milieu - 1,c)
-	lw $ra, 0($sp)
-	addi $sp, $sp, 4
-	jr $ra
-
-cPlusGrand:# else
-	addi $sp, $sp, -4
-	sw $ra, 0($sp)
-	addi $t0, $t0, 1
-	move $a1, $t0 # bas = milieu + 1
-	jal recherche # call recherche(tab, milieu + 1, haut, c)
 	lw $ra, 0($sp)
 	addi $sp, $sp, 4
 	jr $ra
