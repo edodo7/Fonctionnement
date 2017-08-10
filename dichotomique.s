@@ -45,11 +45,11 @@ main:
 
 recherche:
 	bgt $a1, $a2, basPlusGrand # if bas > haut
-	sub $t0, $a2, $a1 # $t0 = bas - haut
+	sub $t0, $a2, $a1 # $t0 = haut - bas
 	sra $t0, $t0, 1 # integer division by 2
-	add $t0, $t0, $a1 # $t0 = bas + (bas - haut) / 2 <==> milieu
-	sll $t1, $t0, 2
-	add $t1, $t1, $a0
+	add $t0, $t0, $a1 # $t0 = bas + (haut - bas) / 2 <==> milieu
+	sll $t1, $t0, 2 # index -> offset
+	add $t1, $t1, $a0 # offset -> pointer
 	lw $t2, 0($t1) # $t2 = tab[milieu]
 	beq $a3, $t2, cEgalTabMilieu # if c == tab[milieu]
 	blt $a3 , $t2 , cPlusPetit # if c < tab[milieu]
