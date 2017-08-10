@@ -44,7 +44,7 @@ main:
 	jr $ra
 
 recherche:
-	bgt $a1, $a0, basPlusGrand # if bas > haut
+	bgt $a1, $a2, basPlusGrand # if bas > haut
 	sub $t0, $a2, $a1 # $t0 = bas - haut
 	li $t1, 2
 	div $t0,$t1
