@@ -18,13 +18,12 @@
 .data
 
 tab:
-	.word 1
 	.word 7
 	.word 19
-	.word 223
-	.word 511
 	.word 32
 	.word 90
+	.word 223
+	.word 511
 
 .text
 
