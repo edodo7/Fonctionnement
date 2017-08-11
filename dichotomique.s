@@ -12,8 +12,6 @@
 #		 return recherche(tab, milieu + 1, haut, c);
 # }
 
-# At the moment of writing this comment, the following code make a stack overflow and crash.
-# I don't know how to fix it now :'( .
 
 .data
 
@@ -33,7 +31,7 @@ main:
 	la $a0, tab # address of first elem of array
 	li $a1, 0 # bas 
 	li $a2 , 6 # haut
-	li $a3, 90 # c
+	li $a3, 7 # c
 	jal recherche
 	move $a0 , $v0
 	li $v0, 1
