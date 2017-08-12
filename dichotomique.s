@@ -31,7 +31,7 @@ main:
 	la $a0, tab # address of first elem of array
 	li $a1, 0 # bas 
 	li $a2 , 6 # haut
-	li $a3, 7 # c
+	li $a3, 511 # c
 	jal recherche
 	move $a0 , $v0
 	li $v0, 1
