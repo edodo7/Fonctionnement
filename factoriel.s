@@ -1,30 +1,40 @@
-# This is a MIPS assembly code that compute factoriel of 4
+# This is a MIPS assembly implementation of the following factorial algorithm
 # TODO : Ask the number to the user as an input
-# TODO : Add more comments
+#
+#	int factoriel(int n){
+#		if (n <= 1)
+#			return 1;
+#		else
+#			return n * factoriel(n - 1);
+#   }
 
 main:
-	addi $sp, $sp, -4
+	addi $sp , $sp , -4
 	sw $ra, 0($sp)
-	li $a0, 4
-	jal fact
+	li $a0, 4 
+	jal factoriel
 	lw $ra, 0($sp)
-	addi $sp, $sp, 4
+	move $a0, $v0 
+	li $v0, 1
+	syscall # this syscall will print  $a0's factorial
+	addi $sp, $sp , 4
 	jr $ra
 
-fact:
-	li $s0, 1
-	bne $a0, $s0, fact_recurse
-	li $a1, 2
-	li $v0, 1
+factoriel:
+	li $t0 , 1
+	ble $a0, $t0, ifCase
+	addi $sp, $sp, -8
+	sw $a0, 0($sp)
+	sw $ra, 4($sp)
+	sub $a0, $a0, $t0
+	jal factoriel # call factoriel(n - 1)
+	lw $t1, 0($sp)# get back n
+	mult $v0, $t1
+	mflo $v0 # $v0 = n * factoriel(n - 1)
+	lw $ra ,4($sp)
+	addi $sp, $sp, 8
 	jr $ra
-fact_recurse:
-	addiu $sp, $sp, -4
-	sw $ra, 0($sp)
-	sub $a0, $a0, 1
-	jal fact
-	lw $ra, 0($sp)
-	addiu $sp, $sp, 4
-	mult $v0, $a1
-	mflo $v0
-	addi $a1, $a1, 1
+
+ifCase:
+	li $v0, 1
 	jr $ra
