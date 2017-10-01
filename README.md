@@ -1,3 +1,4 @@
-# TP-Fonctionnement
+# Fonctionnement
+
 ## TODO
-* Add comments to code.
+* Add more comments to the code.
