@@ -27,8 +27,8 @@ factoriel:
 	sw $a0, 0($sp)
 	sw $ra, 4($sp)
 	sub $a0, $a0, $t0
-	jal factoriel # call factoriel(n - 1)
-	lw $t1, 0($sp)# get back n
+	jal factoriel  # call factoriel(n - 1)
+	lw $t1, 0($sp) # get back n
 	mult $v0, $t1
 	mflo $v0 # $v0 = n * factoriel(n - 1)
 	lw $ra ,4($sp)

@@ -15,30 +15,22 @@ main:
 
 fibo:
 	li $s0, 1
-	bgt $a0, $s0, else # if n <= 1 then return n
-	move $v0, $a0 
-	jr $ra
-
-else:
+	ble $a0, $s0, ifCase # if n <= 1 then return n
 	addi $sp, $sp, -8
 	sw $ra, 4($sp)
 	sw $a0, 0($sp) # current n must be saved because fibo(n - 1)'s call will change its value
 	addi $a0, $a0, -1
-	jal fibo_recur # call fibo(n - 1)
+	jal fibo # call fibo(n - 1)
 	lw $a0, 0($sp) # get back current n for fibo( n - 2)
 	sw $v0, 0($sp) # current v0 , that contains return value of fibo(n - 1), must be saved  because fibo(n - 2)'s call will change its value 
 	addi $a0, $a0, -2
-	jal fibo_recur # call fibo(n - 2)
+	jal fibo # call fibo(n - 2)
 	lw $t0, 0($sp) # get back return value of fibo(n - 1) previously saved and put it in temporary register that will allow to add with fibo(n - 2)'s return value
 	add $v0, $v0, $t0 # $v0 = fibo(n - 1) + fibo(n - 2)
 	lw $ra, 4($sp)
 	addi $sp, $sp, 8
 	jr $ra
 
-fibo_recur:
-	addi $sp, $sp, -4
-	sw $ra, 0($sp)
-	jal fibo
-	lw $ra, 0($sp)
-	addi $sp, $sp, 4
+ifCase:
+	move $v0, $a0 
 	jr $ra
