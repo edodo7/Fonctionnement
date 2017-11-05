@@ -24,7 +24,7 @@ main:
 
 hanoi:
 	li $t0, 1
-	beq $a0, $t0, elseCase
+	beq $a0, $t0, returnOne
 	addi $sp , $sp , -4
 	sw $ra, 0($sp)
 	addi $a0, $a0, -1
@@ -35,6 +35,6 @@ hanoi:
 	addi $sp, $sp, 4
 	jr $ra
 
-elseCase:
+returnOne:
 	li $v0, 1
 	jr $ra

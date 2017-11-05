@@ -1,4 +1,2 @@
 # Fonctionnement
-
-## TODO
-* Add more comments to the code.
+Travaux pratiques et exercices du cours de fonctionnement des ordinateurs donné par Bruno Quoitin.

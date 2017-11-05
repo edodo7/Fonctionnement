@@ -22,7 +22,7 @@ main:
 
 factoriel:
 	li $t0 , 1
-	ble $a0, $t0, ifCase
+	ble $a0, $t0, returnOne
 	addi $sp, $sp, -8
 	sw $a0, 0($sp)
 	sw $ra, 4($sp)
@@ -35,6 +35,6 @@ factoriel:
 	addi $sp, $sp, 8
 	jr $ra
 
-ifCase:
+returnOne:
 	li $v0, 1
 	jr $ra

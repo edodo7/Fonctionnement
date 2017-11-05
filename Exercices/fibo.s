@@ -1,4 +1,11 @@
 # This is a MIPS assembly implementation of fibonacci algorithm
+#
+#    int fibo(int n) {
+#    	if (n <= 1)
+#			return n;
+#		else
+#			return fibo(n - 1) + fibo(n - 2);
+#    }
 
 
 main:
@@ -15,7 +22,7 @@ main:
 
 fibo:
 	li $s0, 1
-	ble $a0, $s0, ifCase # if n <= 1 then return n
+	ble $a0, $s0, returnN # if n <= 1 then return n
 	addi $sp, $sp, -8
 	sw $ra, 4($sp)
 	sw $a0, 0($sp) # current n must be saved because fibo(n - 1)'s call will change its value
@@ -31,6 +38,6 @@ fibo:
 	addi $sp, $sp, 8
 	jr $ra
 
-ifCase:
+returnN:
 	move $v0, $a0 
 	jr $ra

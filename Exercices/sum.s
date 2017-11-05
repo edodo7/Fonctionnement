@@ -7,6 +7,9 @@ main:
 	li $s1, 100 # limit of sum
 	li $v0, 0 
 	jal sum
+	move $a0, $v0
+	li $v0, 1
+	syscall
 	lw $ra, 0($sp)
 	addi $sp, $sp, 4
 	jr $ra
@@ -20,7 +23,4 @@ sum:
 
 
 end_sum:
-	move $a0, $v0
-	li $v0, 1
-	syscall
 	jr $ra
