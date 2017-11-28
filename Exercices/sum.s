@@ -1,11 +1,13 @@
-# This is a MIPS assembly program that compute the sum of the first 100 numbers and print it to the console
+# This is a MIPS assembly program that compute the sum from 0 to n.
+#  def sum(n):
+#		if n == 0:
+#			return 0
+#		return n + sum(n - 1)
 
 main:
 	addi $sp, $sp, -4
 	sw $ra, 0($sp)
-	li $s0, 0 # initialize the counter
-	li $s1, 100 # limit of sum
-	li $v0, 0 
+	li $a0, 100 # limit of sum
 	jal sum
 	move $a0, $v0
 	li $v0, 1
@@ -15,12 +17,20 @@ main:
 	jr $ra
 
 sum:
-	addi $s0, $s0, 1
-	add $v0, $v0, $s0
-	beq $s0, $s1, end_sum
-	j sum
+	beq $a0 , $zero, returnZero
+	addi $sp, $sp, -8
+	sw $ra, 4($sp)
+	sw $a0, 0($sp)
+	addi $a0, $a0, -1
+	jal sum
+	lw $a0, 0($sp)
+	lw $ra, 4($sp)
+	add $v0, $v0, $a0
+	addi $sp, $sp, 8
+	jr $ra
 
 
 
-end_sum:
+returnZero:
+	li $v0, 0
 	jr $ra
